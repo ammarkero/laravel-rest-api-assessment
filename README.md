@@ -57,7 +57,7 @@ Start the server
     - [store data from external api call](#store-data-from-external-api-call)
 - Post:
     - [store post's image](#store-posts-image) `[polymorhpic relationship:one-to-one]`
-    - [get post's image(s)](#get-posts-images) `[polymorhpic relationship:one-to-one]`
+    - [get post's image](#get-posts-image) `[polymorhpic relationship:one-to-one]`
 
 # Usage/Example
 
@@ -369,7 +369,7 @@ http://localhost:8888/api/v1/external-data
 
 #### Request
 
-`POST /api/v1/posts/:id/images`
+`POST /api/v1/posts/:id/image`
 
 ```bash
 curl \
@@ -396,7 +396,7 @@ http://localhost:8888/api/v1/posts/1/image
 }
 ```
 
-## Get Post's image(s)
+## Get Post's image
 
 #### Request
 
@@ -406,7 +406,7 @@ http://localhost:8888/api/v1/posts/1/image
 curl \
 -i \
 -H 'Accept: application/json' \
-http://localhost:8888/api/v1/posts/1/images
+http://localhost:8888/api/v1/posts/1/image
 ```
 
 #### Response
