@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\ExternalDataController;
 use App\Http\Controllers\API\RoleController;
+use App\Http\Controllers\API\RoleUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +24,6 @@ Route::prefix('v1')->group(function () {
     Route::apiResources([
         'users' => UserController::class,
         'roles' => RoleController::class,
+        'users.roles' => RoleUserController::class,
     ]);
 });
