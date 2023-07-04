@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\ExternalDataController;
+use App\Http\Controllers\API\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +22,6 @@ Route::prefix('v1')->group(function () {
     Route::post('external-data', [ExternalDataController::class, 'store'])->name('external-data.store');
     Route::apiResources([
         'users' => UserController::class,
+        'roles' => RoleController::class,
     ]);
 });
