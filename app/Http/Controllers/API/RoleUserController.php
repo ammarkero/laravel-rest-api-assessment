@@ -16,7 +16,9 @@ class RoleUserController extends Controller
      */
     public function index(User $user)
     {
-        return new RoleUserCollection($user->roles);
+        return response()->json([
+            'data' => $user->roles->pluck('title', 'id')
+        ], 200);
     }
 
     /**
@@ -27,9 +29,20 @@ class RoleUserController extends Controller
         $validatedData = $request->validate([
             'role_id' => 'required|exists:roles,id',
         ]);
+        
+        if ($user->roles->contains($validatedData['role_id'])) {
+            return response()->json([
+                'message' => 'The user already has this role.'
+            ], 500);
+        }
 
         $user->roles()->attach($validatedData['role_id']);
-
-        return new RoleUserResource($user->roles->last());
+        
+        return response()->json([
+            'data' => [
+                'user_id' => $user->id,
+                'role_id' => $validatedData['role_id'],
+            ]
+        ], 201);
     }
 }

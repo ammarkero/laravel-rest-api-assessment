@@ -10,6 +10,9 @@ use App\Http\Resources\PostResource;
 
 class PostController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function showImage(Post $post)
     {
         return response()->json([
@@ -19,6 +22,9 @@ class PostController extends Controller
         ], 200);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function storeImage(Request $request, Post $post)
     {
         $validatedData = $request->validate([

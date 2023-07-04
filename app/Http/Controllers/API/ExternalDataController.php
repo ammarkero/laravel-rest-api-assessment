@@ -10,6 +10,9 @@ class ExternalDataController extends Controller
 {
     public function retrieve()
     {
+        /**
+         * Call external API to retrieve data
+         */
         $url = 'https://jsonplaceholder.typicode.com/users/1/todos';
         $response = @file_get_contents($url);
 
@@ -27,6 +30,9 @@ class ExternalDataController extends Controller
         ], 200);
     }
 
+    /**
+     * Store external data in database
+     */
     public function store()
     {
         $count = 0;

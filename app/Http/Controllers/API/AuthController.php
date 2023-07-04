@@ -10,6 +10,9 @@ use App\Models\UserLog;
 
 class AuthController extends Controller
 {
+    /**
+     * Get a JWT via given credentials.
+     */
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -34,6 +37,9 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+    /**
+     * Get token from header and invalidate it.
+     */
     public function logout()
     {
         $token = request()->bearerToken();
@@ -52,6 +58,9 @@ class AuthController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
+    /**
+     * Return response with token.
+     */
     protected function respondWithToken($token)
     {
         return response()->json([
