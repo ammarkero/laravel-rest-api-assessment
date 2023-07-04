@@ -82,18 +82,18 @@ http://localhost:8888/api/v1/users
 {
     "data":[
         {
-	        "id":1,
-	        "name":"Jake Smith",
-	        "email":"jakesmith@email.com",
-	        "created_at": "2023-07-04T05:36:14.000000Z",
-			"updated_at": "2023-07-04T10:24:28.000000Z"
+        "id":1,
+        "name":"Jake Smith",
+        "email":"jakesmith@email.com",
+        "created_at": "2023-07-04T05:36:14.000000Z",
+        "updated_at": "2023-07-04T10:24:28.000000Z"
         },
         {
-	        "id":2,
-	        "name":"Donato Padberg",
-	        "email":"donato.padberg@email.com",
-	        "created_at": "2023-07-04T05:36:14.000000Z",
-			"updated_at": "2023-07-04T10:24:28.000000Z"
+        "id":2,
+        "name":"Donato Padberg",
+        "email":"donato.padberg@email.com",
+        "created_at": "2023-07-04T05:36:14.000000Z",
+        "updated_at": "2023-07-04T10:24:28.000000Z"
         }
     ]
 }
@@ -123,7 +123,7 @@ http://localhost:8888/api/v1/users
         "name": "Xavier",
         "email": "hello@xavier.com",
         "created_at": "2023-07-04T14:39:11.000000Z",
-		"updated_at": "2023-07-04T14:39:11.000000Z"
+        "updated_at": "2023-07-04T14:39:11.000000Z"
     }
 }
 ```
@@ -150,7 +150,7 @@ http://localhost:8888/api/v1/users/4
         "name":"Donato Padberg",
         "email":"donato.padberg@email.com",
         "created_at": "2023-07-04T05:36:14.000000Z",
-		"updated_at": "2023-07-04T10:24:28.000000Z"
+        "updated_at": "2023-07-04T10:24:28.000000Z"
     }
 }
 ```
@@ -179,7 +179,7 @@ http://localhost:8888/api/v1/users/1
         "name": "Sara",
         "email": "hello@sara.com",
         "created_at": "2023-07-04T14:39:11.000000Z",
-		"updated_at": "2023-07-04T14:39:11.000000Z"
+        "updated_at": "2023-07-04T14:39:11.000000Z"
     }
 }
 ```
