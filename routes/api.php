@@ -34,8 +34,8 @@ Route::prefix('v1')->middleware(['throttle:30,1'])->group(function () {
     Route::get('external-data', [ExternalDataController::class, 'retrieve'])->name('external-data.retrieve');
     Route::post('external-data', [ExternalDataController::class, 'store'])->name('external-data.store');
 
-    Route::get('posts/{post}/images', [PostController::class, 'showImage'])->name('posts.show-images');
-    Route::post('posts/{post}/images', [PostController::class, 'storeImage'])->name('posts.store-images');
+    Route::get('posts/{post}/image', [PostController::class, 'showImage'])->name('posts.show-image');
+    Route::post('posts/{post}/image', [PostController::class, 'storeImage'])->name('posts.store-image');
 
     Route::get('users/{user}/roles', [RoleUserController::class, 'index'])->name('users.roles.index');
     Route::post('users/{user}/roles', [RoleUserController::class, 'store'])->name('users.roles.store');
