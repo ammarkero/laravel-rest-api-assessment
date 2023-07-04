@@ -24,7 +24,7 @@ use App\Http\Controllers\API\AuthController;
 //     return $request->user();
 // });
 
-Route::prefix('v1')->group(function () {
+Route::prefix('v1')->middleware(['throttle:30,1'])->group(function () {
 
     Route::prefix('auth')->group(function () {
         Route::post('login', [AuthController::class, 'login'])->name('auth.login');
@@ -34,12 +34,14 @@ Route::prefix('v1')->group(function () {
     Route::get('external-data', [ExternalDataController::class, 'retrieve'])->name('external-data.retrieve');
     Route::post('external-data', [ExternalDataController::class, 'store'])->name('external-data.store');
 
-    Route::get('posts/{post}/image', [PostController::class, 'showImage'])->name('posts.show-images');
-    Route::post('posts/{post}/image', [PostController::class, 'storeImage'])->name('posts.store-images');
+    Route::get('posts/{post}/images', [PostController::class, 'showImage'])->name('posts.show-images');
+    Route::post('posts/{post}/images', [PostController::class, 'storeImage'])->name('posts.store-images');
 
-    Route::apiResources([
-        'users' => UserController::class,
-        'roles' => RoleController::class,
-        'users.roles' => RoleUserController::class,
-    ]);
+    Route::get('users/{user}/roles', [RoleUserController::class, 'index'])->name('users.roles.index');
+    Route::post('users/{user}/roles', [RoleUserController::class, 'store'])->name('users.roles.store');
+
+    Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
+    Route::post('roles', [RoleController::class, 'store'])->name('roles.store');
+
+    Route::apiResource('users', UserController::class);
 });
