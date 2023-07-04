@@ -21,6 +21,10 @@ use App\Http\Controllers\API\RoleUserController;
 Route::prefix('v1')->group(function () {
     Route::get('external-data', [ExternalDataController::class, 'retrieve'])->name('external-data.retrieve');
     Route::post('external-data', [ExternalDataController::class, 'store'])->name('external-data.store');
+
+    Route::get('posts/{post}/image', [PostController::class, 'showImage'])->name('posts.show-images');
+    Route::post('posts/{post}/image', [PostController::class, 'storeImage'])->name('posts.store-images');
+
     Route::apiResources([
         'users' => UserController::class,
         'roles' => RoleController::class,
