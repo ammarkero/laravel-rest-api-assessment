@@ -10,15 +10,10 @@ class Role extends Model
 {
     use HasFactory;
 
-    const ADMIN = 1;
-    const USER = 2;
-    const GUEST = 3;
-
     protected $table = 'roles';
 
     protected $fillable = [
-        'user_id',
-        'role_id'
+        'title'
     ];
 
     public function users(): BelongsToMany
