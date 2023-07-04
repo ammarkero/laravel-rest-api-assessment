@@ -1,66 +1,453 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel REST API Assessment
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a simple Laravel web application providing a REST API.
 
-## About Laravel
+## Run Locally
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Clone the project
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```bash
+  git clone https://github.com/ammarkero/laravel-rest-api-assessment.git
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Go to the project directory
 
-## Learning Laravel
+```bash
+  cd laravel-rest-api-assessment
+```
+Generate app key
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+  php artisan key:generate
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Run database migration
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+  php artisan migrate
+```
 
-## Laravel Sponsors
+Install dependencies
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+  composer install
+```
 
-### Premium Partners
+Start the server
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```bash
+  php artisan serve
+```
 
-## Contributing
+# List of APIs
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- User:
+    - [get all users](#get-list-of-users)
+    - [create a new user](#create-a-new-user)
+    - [get a specific user](#get-a-specific-user)
+    - [update an user](#update-a-specific-user)
+    - [store user's role](#create-a-new-users-role) `[many-to-many relationship]`
+    - [get user's role(s)](#get-list-of-users-role) `[many-to-many relationship]`
+    - [delete an user](#delete-a-specific-user)
+- Authentication:
+    - [user login](#user-login) (generate JWToken)
+    - [user logout](#user-logout)
+- External data:
+    - [get data from external api call](#get-data-from-external-api-call)
+    - [store data from external api call](#store-data-from-external-api-call)
+- Post:
+    - [store post's image](#store-posts-image) `[polymorhpic relationship:one-to-one]`
+    - [get post's image(s)](#get-posts-images) `[polymorhpic relationship:one-to-one]`
 
-## Code of Conduct
+# Usage/Example
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+The REST API to the app is described below.
 
-## Security Vulnerabilities
+## Get list of Users
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### Request
 
-## License
+`GET /api/v1/users`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+curl \
+-i \
+-H 'Accept: application/json' \
+http://localhost:8888/api/v1/users
+```
+
+#### Response
+
+```json
+{
+    "data":[
+        {
+	        "id":1,
+	        "name":"Jake Smith",
+	        "email":"jakesmith@email.com",
+	        "created_at": "2023-07-04T05:36:14.000000Z",
+			"updated_at": "2023-07-04T10:24:28.000000Z"
+        },
+        {
+	        "id":2,
+	        "name":"Donato Padberg",
+	        "email":"donato.padberg@email.com",
+	        "created_at": "2023-07-04T05:36:14.000000Z",
+			"updated_at": "2023-07-04T10:24:28.000000Z"
+        }
+    ]
+}
+```
+
+## Create a new User
+
+#### Request
+
+`POST /api/v1/users`
+
+```bash
+url \
+-i -X POST \
+-H 'Accept: application/json' \
+-H 'Content-Type:application/json' \
+-d '{"name": "Xavier", "email": "hello@xavier.com","password":"12345678"}' \
+http://localhost:8888/api/v1/users
+```
+
+#### Response
+
+```json
+{
+    "data": {
+        "id": 3,
+        "name": "Xavier",
+        "email": "hello@xavier.com",
+        "created_at": "2023-07-04T14:39:11.000000Z",
+		"updated_at": "2023-07-04T14:39:11.000000Z"
+    }
+}
+```
+
+## Get a specific User
+
+#### Request
+
+`GET /api/v1/users/:id`
+
+```bash
+curl \
+-i \
+-H 'Accept: application/json' \
+http://localhost:8888/api/v1/users/4
+```
+
+#### Response
+
+```json
+{
+	"data": {
+        "id":2,
+        "name":"Donato Padberg",
+        "email":"donato.padberg@email.com",
+        "created_at": "2023-07-04T05:36:14.000000Z",
+		"updated_at": "2023-07-04T10:24:28.000000Z"
+    }
+}
+```
+    
+## Update a specific User
+
+#### Request
+
+`PUT /api/v1/users/:id`
+
+```bash
+curl \
+-i -X PUT \
+-H 'Accept: application/json' \
+-H 'Content-Type:application/json' \
+-d '{"name": "Sara","email": "hello@sara.com","password": "abc1234567"} \
+http://localhost:8888/api/v1/users/1
+```
+
+#### Response
+
+```json
+{
+    "data": {
+        "id": 1,
+        "name": "Sara",
+        "email": "hello@sara.com",
+        "created_at": "2023-07-04T14:39:11.000000Z",
+		"updated_at": "2023-07-04T14:39:11.000000Z"
+    }
+}
+```
+    
+## Create a new User's role
+
+#### Request
+
+`POST /api/v1/users/:id/roles`
+
+```bash
+curl \
+-i -X POST \
+-H 'Accept: application/json' \
+-H 'Content-Type:application/json' \
+-d '{"role_id": "1"}'\
+http://localhost:8888/api/v1/users/2/roles
+```
+
+#### Response
+
+```json
+{
+    "data": {
+        "user_id": 3,
+        "role_id": 1
+    }
+}
+```
+
+## Get list of User's role
+
+#### Request
+
+`GET api/v1/users/:id/roles`
+
+```bash
+curl \
+-i \
+-H 'Accept: application/json' \
+http://localhost:8888/api/v1/users/2/roles
+```
+
+#### Response
+
+```json
+{
+    "data": {
+        "1": "Admin",
+        "2": "User"
+    }
+}
+```
+    
+## Delete a specific User
+
+#### Request
+
+`DELETE /api/v1/users/:id`
+```bash
+curl \
+-i -X DELETE \
+-H 'Accept: application/json' \
+-H 'Content-Type:application/json' \
+http://localhost:8888/api/v1/users/1
+```
+
+#### Response
+
+```json
+// Returning response status of '204 No Content'
+```
+    
+## User Login 
+Request JWToken and  store `login_timestamp` value in `user_logs` table
+
+#### Request
+
+`POST /api/v1/auth/login`
+
+```bash
+curl \
+-i -X POST \
+-H 'Accept: application/json' \
+-H 'Content-Type:application/json' \
+-d '{"email": "zack@hello.com", "password": "12345678"}' \
+http://localhost:8888/api/v1/auth/login
+```
+
+#### Response
+
+```json
+{
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE2ODg0ODI2MjksImV4cCI6MTY4ODQ4NjIyOSwibmJmIjoxNjg4NDgyNjI5LCJqdGkiOiIxZUVrcURSUlVKNG9ydzRkIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.zHSfRL89l6LUdVRoWWWKfGOJzsC6c4MuPwiPClxr4BY",
+    "token_type": "bearer",
+    "expires_in": 3600
+}
+```
+    
+## User Logout
+store `logout_timestamp` value in `user_logs` table
+
+#### Request
+
+`POST /api/v1/auth/logout`
+
+```bash
+curl \ 
+-i -X POST \
+-H 'Accept: application/json' \
+-H 'Content-Type:application/json' \
+-H "Authorization: Bearer {token}" \
+http://localhost:8888/api/v1/auth/logout
+```
+
+#### Response
+
+```json
+{
+    "message": "Successfully logged out"
+}
+```
+
+## Get data from external API call
+
+#### Request
+
+`GET /api/v1/external-data`
+
+```bash
+curl \
+-i \
+-H 'Accept: application/json' \
+http://localhost:8888/api/v1/external-data
+```
+
+#### Response
+
+```json
+{
+    "message": "External data retrieved successfully",
+    "data": [
+        {
+            "userId": 1,
+            "id": 1,
+            "title": "delectus aut autem",
+            "completed": false
+        },
+        {
+            "userId": 1,
+            "id": 2,
+            "title": "quis ut nam facilis et officia qui",
+            "completed": false
+        },
+        {
+            "userId": 1,
+            "id": 2,
+
+            // ...
+
+```
+
+## Store data from external API call
+
+#### Request
+
+`POST /api/v1/external-data`
+
+```bash
+curl \
+-i -X POST \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+http://localhost:8888/api/v1/external-data
+```
+
+#### Response
+
+```json
+{
+    "message": "External data stored successfully",
+    "count": 20
+}
+```
+
+## Store Post's image
+
+#### Request
+
+`POST /api/v1/posts/:id/images`
+
+```bash
+curl \
+-i -X POST \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{"image_path": "unicorn-ice-cream.jpg"}'
+http://localhost:8888/api/v1/posts/1/image
+```
+
+#### Response
+
+```json
+{
+    "data": {
+        "id": 1,
+        "title": "Tallest Mountain on Earth",
+        "content": "Mount Everest is Earth's highest...",
+        "image": {
+            "id": 1,
+            "image_path": "unicorn-ice-cream.jpg"
+        }
+    }
+}
+```
+
+## Get Post's image(s)
+
+#### Request
+
+`GET /api/v1/posts/:id/image`
+
+```bash
+curl \
+-i \
+-H 'Accept: application/json' \
+http://localhost:8888/api/v1/posts/1/images
+```
+
+#### Response
+
+```json
+{
+    "data": {
+        "image_path": "unicorn-ice-cream.jpg"
+    }
+}
+```
+    
+## Status Codes
+
+Response returns the following status codes in its API:
+
+| Status Code | Description |
+| :--- | :--- |
+| 200 | `OK` |
+| 201 | `CREATED` |
+| 400 | `BAD REQUEST` |
+| 404 | `NOT FOUND` |
+| 429 | `TOO MANY REQUESTS` |
+| 500 | `INTERNAL SERVER ERROR` |
+
+## Useful Resources
+- Download (pick one) and import SQL Dump into your database.
+
+```
+root
+|
+|- rest_api_db.sql
+|- rest_api_db.gz
+|
+```
+
+-  Download and import Postman Collection to test API calls via Postman.
+
+```
+root
+|
+|- rest_api_postman_collection.json
+|
+```
