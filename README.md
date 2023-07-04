@@ -21,10 +21,10 @@ Generate app key
   php artisan key:generate
 ```
 
-Run database migration
+Run database migration and seeder
 
 ```bash
-  php artisan migrate
+  php artisan migrate:refresh --seed
 ```
 
 Install dependencies
