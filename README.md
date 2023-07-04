@@ -433,17 +433,8 @@ Response returns the following status codes in its API:
 | 500 | `INTERNAL SERVER ERROR` |
 
 ## Useful Resources
-- Download (pick one) and import SQL Dump into your database.
 
-```
-root
-|
-|- rest_api_db.sql
-|- rest_api_db.gz
-|
-```
-
--  Download and import Postman Collection to test API calls via Postman.
+- Locate and import Postman Collection to test API calls via Postman.
 
 ```
 root
