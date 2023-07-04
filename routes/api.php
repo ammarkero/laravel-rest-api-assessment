@@ -17,4 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::get('external-data', [ExternalDataController::class, 'retrieve'])->name('external-data.retrieve');
     Route::post('external-data', [ExternalDataController::class, 'store'])->name('external-data.store');
+    Route::apiResources([
+        'users' => UserController::class,
+    ]);
 });
