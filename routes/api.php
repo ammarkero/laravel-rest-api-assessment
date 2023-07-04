@@ -7,6 +7,7 @@ use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\ExternalDataController;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\RoleUserController;
+use App\Http\Controllers\API\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,17 @@ use App\Http\Controllers\API\RoleUserController;
 |
 */
 
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
 Route::prefix('v1')->group(function () {
+
+    Route::prefix('auth')->group(function () {
+        Route::post('login', [AuthController::class, 'login'])->name('auth.login');
+        Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api')->name('auth.logout');
+    });
+
     Route::get('external-data', [ExternalDataController::class, 'retrieve'])->name('external-data.retrieve');
     Route::post('external-data', [ExternalDataController::class, 'store'])->name('external-data.store');
 

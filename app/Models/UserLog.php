@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class UserLog extends Model
 {
     use HasFactory;
+
+    protected $table = 'user_logs';
+
+    protected $fillable = [
+        'user_id',
+        'login_timestamp',
+        'logout_timestamp',
+        'token'
+    ];
 }
