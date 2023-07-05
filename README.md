@@ -204,7 +204,7 @@ http://localhost:8888/api/v1/users/2/roles
 ```json
 {
     "data": {
-        "user_id": 3,
+        "user_id": 2,
         "role_id": 1
     }
 }
@@ -249,7 +249,7 @@ http://localhost:8888/api/v1/users/1
 
 #### Response
 
-```json
+```
 // Returning response status of '204 No Content'
 ```
     
